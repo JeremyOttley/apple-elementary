@@ -27,3 +27,24 @@ alias beep="echo -e '\a'"
 alias pgrep='ps aux | grep'
 alias gs='git status'
 
+# File navigation
+alias ll='ls -al'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+
+# Miscellaneous
+alias md='mkdir -p'
+
+# Get Git branch
+parse_git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
+
+# Format to user@host:/path/to/directory (branch-name)
+export PS1="\[\033[36m\]\u\[\033[m\]@\[\033[32m\]\h:\[\033[33;1m\]\w\$(parse_git_branch)\[\033[m\]\$\n==> "
+
+# Path
+export PATH=$HOME/bin:$PATH
